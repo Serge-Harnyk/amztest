@@ -59,7 +59,7 @@ public class AmazonEntryPoint {
         while (true) {
             String line = reader.readLine();
             if (line == null) break;
-
+            System.out.println(line);
             br.write(line);
             br.newLine();
 
