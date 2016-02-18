@@ -77,6 +77,7 @@ public class AmazonEntryPoint {
                 System.out.println(count);
             }
         }
+        br.close();
         System.out.println(count);
     }
 }
