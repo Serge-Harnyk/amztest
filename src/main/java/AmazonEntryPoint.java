@@ -2,6 +2,9 @@ import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.GetObjectRequest;
+import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import org.apache.hadoop.fs.*;
 import org.apache.hadoop.fs.s3a.S3AInputStream;
 
@@ -19,9 +22,14 @@ public class AmazonEntryPoint {
         AmazonS3Client s3Client = new AmazonS3Client(new ProfileCredentialsProvider());
         try {
             Long ts0 = System.currentTimeMillis();
-            S3AInputStream s3Ais =
-                    new S3AInputStream(bucketName, key, 0l, s3Client, new FileSystem.Statistics("s3a"));
-            process(s3Ais);
+//            InputStream stream =
+//                    new S3AInputStream(bucketName, key, 0l, s3Client, new FileSystem.Statistics("s3a"));
+            S3Object s3object = s3Client.getObject(new GetObjectRequest(
+                    bucketName, key));
+            InputStream stream =s3object.getObjectContent();
+
+
+            process(stream);
             System.out.println(System.currentTimeMillis() - ts0);
         } catch (AmazonServiceException ase) {
             System.out.println("Error Message:    " + ase.getMessage());
