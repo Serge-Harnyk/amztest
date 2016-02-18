@@ -65,13 +65,14 @@ public class AmazonEntryPoint {
 //        File f = new File("dest.csv");
 //        FileWriter fr = new FileWriter(f);
 //        BufferedWriter br  = new BufferedWriter(fr);
+        int count = 0;
         while (true) {
             String line = reader.readLine();
             if (line == null) break;
-
+            count ++;
            // br.write(line);
 //            br.newLine();
         }
-        System.out.println();
+        System.out.println(count);
     }
 }
