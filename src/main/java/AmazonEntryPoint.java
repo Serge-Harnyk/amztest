@@ -21,11 +21,11 @@ public class AmazonEntryPoint {
         try {
             System.out.println("Downloading an object");
             System.out.println(System.currentTimeMillis());
-            S3Object s3object = s3Client.getObject(new GetObjectRequest(
-                    bucketName, key));
-            System.out.println("Content-Type: " +
-                    s3object.getObjectMetadata().getContentType());
-            displayTextInputStream(s3object.getObjectContent());
+//            S3Object s3object = s3Client.getObject(new GetObjectRequest(
+//                    bucketName, key));
+//            System.out.println("Content-Type: " +
+//                    s3object.getObjectMetadata().getContentType());
+//            displayTextInputStream(s3object.getObjectContent());
             GetObjectRequest rangeObjectRequest = new GetObjectRequest(
                     bucketName, key);
             rangeObjectRequest.setRange(0, 10);
