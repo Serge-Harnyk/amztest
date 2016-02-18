@@ -73,7 +73,7 @@ public class AmazonEntryPoint {
             //System.out.println(line);
             br.write(line);
             br.newLine();
-            if(count % 10000 == 0) {
+            if(count % 1000000 == 0) {
                 System.out.println(count);
             }
         }
