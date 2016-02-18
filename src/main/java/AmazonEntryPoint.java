@@ -23,7 +23,7 @@ public class AmazonEntryPoint {
         InputStream stream;
         try {
             Long ts0 = System.currentTimeMillis();
-            if (args[0] == "aws") {
+            if (args[0].equals("aws")) {
                 System.out.println("Use Amazon SDK");
                 S3Object s3object = s3Client.getObject(new GetObjectRequest(bucketName, key));
                 stream = s3object.getObjectContent();
