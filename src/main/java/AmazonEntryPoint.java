@@ -16,19 +16,25 @@ import java.io.*;
 public class AmazonEntryPoint {
 
     private static String bucketName = "serhiy.dremio.com";
-    private static String key = "tmp/ltl.csv";
 
     public static void main(String[] args) throws IOException {
         AmazonS3Client s3Client = new AmazonS3Client(new ProfileCredentialsProvider());
+        String key = args[1];
+        InputStream stream;
         try {
+            switch (args[0]){
+                case "aws":
+                    S3Object s3object = s3Client.getObject(new GetObjectRequest(
+                            bucketName, key));
+                    stream =s3object.getObjectContent();
+                    break;
+                default:
+                    stream =
+                        new S3AInputStream(bucketName, key, 0l, s3Client, new FileSystem.Statistics("s3a"));
+                    break;
+
+            }
             Long ts0 = System.currentTimeMillis();
-//            InputStream stream =
-//                    new S3AInputStream(bucketName, key, 0l, s3Client, new FileSystem.Statistics("s3a"));
-            S3Object s3object = s3Client.getObject(new GetObjectRequest(
-                    bucketName, key));
-            InputStream stream =s3object.getObjectContent();
-
-
             process(stream);
             System.out.println(System.currentTimeMillis() - ts0);
         } catch (AmazonServiceException ase) {
