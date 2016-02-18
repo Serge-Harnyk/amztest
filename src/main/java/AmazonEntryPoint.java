@@ -70,8 +70,9 @@ public class AmazonEntryPoint {
             String line = reader.readLine();
             if (line == null) break;
             count ++;
-           br.write(line);
-            br.newLine();
+            System.out.println(line);
+//           br.write(line);
+//            br.newLine();
         }
         System.out.println(count);
     }
