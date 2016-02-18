@@ -41,8 +41,8 @@ public class AmazonEntryPoint {
         while (true) {
             String line = reader.readLine();
             if (line == null) break;
-            //br.write(line);
-            //br.newLine();
+            br.write(line);
+            br.newLine();
 
         }
         br.close();
