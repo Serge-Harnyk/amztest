@@ -24,9 +24,11 @@ public class AmazonEntryPoint {
         try {
             Long ts0 = System.currentTimeMillis();
             if (args[0] == "aws") {
+                System.out.println("Use Amazon SDK");
                 S3Object s3object = s3Client.getObject(new GetObjectRequest(bucketName, key));
                 stream = s3object.getObjectContent();
             } else {
+                System.out.println("Use Hadoop FS");
                 stream = new S3AInputStream(bucketName, key, 0l, s3Client, new FileSystem.Statistics("s3a"));
             }
             process(stream);
