@@ -21,14 +21,11 @@ public class AmazonEntryPoint {
         try {
             System.out.println("Downloading an object");
             System.out.println(System.currentTimeMillis());
-           // S3Object s3object = s3Client.getObject(new GetObjectRequest(
-                   // bucketName, key));
-           // System.out.println("Content-Type: " +
-                //    s3object.getObjectMetadata().getContentType());
-           // displayTextInputStream(s3object.getObjectContent());
-
-            // Get a range of bytes from an object.
-
+            S3Object s3object = s3Client.getObject(new GetObjectRequest(
+                    bucketName, key));
+            System.out.println("Content-Type: " +
+                    s3object.getObjectMetadata().getContentType());
+            displayTextInputStream(s3object.getObjectContent());
             GetObjectRequest rangeObjectRequest = new GetObjectRequest(
                     bucketName, key);
             rangeObjectRequest.setRange(0, 10);
@@ -62,20 +59,21 @@ public class AmazonEntryPoint {
         // Read one text line at a time and display.
         BufferedReader reader = new BufferedReader(new
                 InputStreamReader(input));
-        File f = new File("/data/dest.csv");
+        File f = new File("/tmp/dest.csv");
         FileWriter fr = new FileWriter(f);
         BufferedWriter br  = new BufferedWriter(fr);
         int count = 0;
         while (true) {
             String line = reader.readLine();
             if (line == null) break;
+
             count ++;
-            //System.out.println(line);
+           // System.out.println(line);
             br.write(line);
             br.newLine();
-//            if(count % 1000000 == 0) {
-//                System.out.println(count);
-//            }
+            if(count % 1000000 == 0) {
+                System.out.println(line);
+            }
         }
         br.close();
         System.out.println(count);
