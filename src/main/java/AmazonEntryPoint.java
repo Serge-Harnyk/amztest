@@ -35,17 +35,17 @@ public class AmazonEntryPoint {
         // Read one text line at a time and display.
         BufferedReader reader = new BufferedReader(new
                 InputStreamReader(input));
-        File f = new File("/tmp/dest.csv");
-        FileWriter fr = new FileWriter(f);
-        BufferedWriter br  = new BufferedWriter(fr);
+//        File f = new File("/tmp/dest.csv");
+//        FileWriter fr = new FileWriter(f);
+//        BufferedWriter br  = new BufferedWriter(fr);
         while (true) {
             String line = reader.readLine();
             if (line == null) break;
-            br.write(line);
-            br.newLine();
+//            br.write(line);
+//            br.newLine();
 
         }
-        br.close();
+//        br.close();
 
     }
 }
